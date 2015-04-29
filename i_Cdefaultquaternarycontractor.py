@@ -49,21 +49,21 @@ def i_Cdefaultquaternarycontractor(Z_p, W_p, X_p, Y_p, function_p):
         error('Error : Unhandled argument type.')
     
     # Shape conversions suitable for the pointers to send to the library.
-    pZ = reshapetopointer(Z_p, nb, n, m)
-    pW = reshapetopointer(W_p, nb, n, m)
-    pX = reshapetopointer(X_p, nb, n, m)
-    pY = reshapetopointer(Y_p, nb, n, m)
+    pZ_p = reshapetopointer(Z_p, nb, n, m)
+    pW_p = reshapetopointer(W_p, nb, n, m)
+    pX_p = reshapetopointer(X_p, nb, n, m)
+    pY_p = reshapetopointer(Y_p, nb, n, m)
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.c_uint, ctypes.c_uint, ctypes.c_uint)
-    hApiParams = (1, "pZ", 0), (1, "pW", 0), (1, "pX", 0), (1, "pY", 0), (1, "nb", 0), (1, "n", 0), (1, "m", 0),
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.c_uint, ctypes.c_uint, ctypes.c_uint)
+    hApiParams = (1, "pZ_p", 0), (1, "pW_p", 0), (1, "pX_p", 0), (1, "pY_p", 0), (1, "nb", 0), (1, "n", 0), (1, "m", 0),
     function_call = hApiProto((function_p, hDll), hApiParams)
 
-    function_call(pZ, pW, pX, pY, ctypes.c_uint(nb), ctypes.c_uint(n), ctypes.c_uint(m))
+    function_call(pZ_p, pW_p, pX_p, pY_p, ctypes.c_uint(nb), ctypes.c_uint(n), ctypes.c_uint(m))
     
     # Conversions to human-readable format.
-    Z = reshapefrompointer(pZ, nb, n, m)
-    W = reshapefrompointer(pW, nb, n, m)
-    X = reshapefrompointer(pX, nb, n, m)
-    Y = reshapefrompointer(pY, nb, n, m)
+    Z = reshapefrompointer(pZ_p, nb, n, m)
+    W = reshapefrompointer(pW_p, nb, n, m)
+    X = reshapefrompointer(pX_p, nb, n, m)
+    Y = reshapefrompointer(pY_p, nb, n, m)
 
     return Z, W, X, Y

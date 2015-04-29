@@ -44,15 +44,15 @@ def i_Cdefaultunarycontractor(X_p, function_p):
         error('Error : Unhandled argument type.')
     
     # Shape conversions suitable for the pointers to send to the library.
-    pX = reshapetopointer(X_p, nb, n, m)
+    pX_p = reshapetopointer(X_p, nb, n, m)
 
-    hApiProto = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_uint, ctypes.c_uint, ctypes.c_uint)
-    hApiParams = (1, "pX", 0), (1, "nb", 0), (1, "n", 0), (1, "m", 0),
+    hApiProto = ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_double), ctypes.c_uint, ctypes.c_uint, ctypes.c_uint)
+    hApiParams = (1, "pX_p", 0), (1, "nb", 0), (1, "n", 0), (1, "m", 0),
     function_call = hApiProto((function_p, hDll), hApiParams)
 
-    function_call(pX, ctypes.c_uint(nb), ctypes.c_uint(n), ctypes.c_uint(m))
+    function_call(pX_p, ctypes.c_uint(nb), ctypes.c_uint(n), ctypes.c_uint(m))
     
     # Conversions to human-readable format.
-    X = reshapefrompointer(pX, nb, n, m)
+    X = reshapefrompointer(pX_p, nb, n, m)
 
     return X

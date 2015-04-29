@@ -3,6 +3,8 @@ from i_Cdefaultbinarycontractor import *
 from i_Cdefaultternarycontractor import *
 from i_Cdefaultquaternarycontractor import *
 from i_Cdefaultquinarycontractor import *
+from i_defaultfn1arg import *
+from i_defaultfn2arg import *
 
 
 # Should use NumPy arrays...?
@@ -33,11 +35,60 @@ from i_Cdefaultquinarycontractor import *
 
 # iboolean : itrue -> [1,1], ifalse -> [0,0], iperhaps -> [0,1].
 
+# Z = i_Add([0,2], [-1,2])
+# Z = i_Add([[0,1],[0,10],[0,10]], [[-1,0],[2,5],[-1,0]])
+# X = [[[-2,2],[2,4],[-4,1]],[[-1,5],[-5,8],[-7,2]],[[-1,1],[0,2],[1,2]],[[-2,2],[2,8],[-1,2]]]
+# Y = [[[-4,1],[1,2],[-3,2]],[[-5,1],[-4,7],[-4,1]],[[-3,2],[2,2],[-1,0]],[[0,1],[-2,0],[-3,1]]]
+# Z = i_Add(X,Y)
+# X = ([[-2,2],[2,4],[-4,1]],[[-1,5],[-5,8],[-7,2]],[[-1,1],[0,2],[1,2]],[[-2,2],[2,8],[-1,2]])
+# Y = ([[-4,1],[1,2],[-3,2]],[[-5,1],[-4,7],[-4,1]],[[-3,2],[2,2],[-1,0]],[[0,1],[-2,0],[-3,1]])
+# Z = i_Add(X,Y)
+
 # [Z, X, Y] = i_Cadd([-10,1], [0,2], [-1,2])
 # [Z, X, Y] = i_Cadd([[-10,10],[2,10],[10,11]], [[0,1],[0,10],[0,10]], [[-1,0],[2,5],[-1,0]])
 
 NaN = float('NaN')
 Inf = float('Inf')
+
+#----------------------------------------------------------------------
+# Operators
+#----------------------------------------------------------------------
+
+def i_Add(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Addx');
+    return Z
+
+def i_Sub(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Subx');
+    return Z
+
+def i_Mul(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Mulx');
+    return Z
+
+def i_Div(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Divx');
+    return Z
+
+#----------------------------------------------------------------------
+# Functions
+#----------------------------------------------------------------------
+
+def i_Min(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Minx');
+    return Z
+
+def i_Max(X_p, Y_p):
+    Z = i_defaultfn2arg(X_p, Y_p, 'Maxx');
+    return Z
+
+def i_Abs(X_p):
+    Y = i_defaultfn1arg(X_p, 'Absx');
+    return Y
+
+#----------------------------------------------------------------------
+# Contractors
+#----------------------------------------------------------------------
 
 def i_Cabs(Y_p, X_p):
     [Y, X] = i_Cdefaultbinarycontractor(Y_p, X_p, 'Cabsx');

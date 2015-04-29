@@ -4,6 +4,22 @@ import ctypes
 def error(*objs):
     print(*objs, file=sys.stderr)
 
+def createpointer(nb, n, m):
+    if (nb == 1):
+        if (n > 1): 
+            if (m > 1): 
+                pX = (ctypes.c_double*(2*n*m))()
+            else:
+                pX = (ctypes.c_double*(2*n))()
+        else:
+            pX = (ctypes.c_double*2)()
+    else:
+        if (n > 1): 
+            pX = (ctypes.c_double*(2*n*nb))()
+        else:
+            pX = (ctypes.c_double*(2*nb))()
+    return pX
+
 def reshapetopointer(X, nb, n, m):
     if (nb == 1):
         if (n > 1): 
