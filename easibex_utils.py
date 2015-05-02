@@ -1,26 +1,38 @@
 from __future__ import print_function
 import ctypes
 
-def error(*objs):
+def i_error(*objs):
     print(*objs, file=sys.stderr)
 
-def createpointer(nb, n, m):
+def i_createpointer(nb, n, m, s, t):
     if (nb == 1):
         if (n > 1): 
             if (m > 1): 
-                pX = (ctypes.c_double*(2*n*m))()
+                pX = (t*(s*n*m))()
             else:
-                pX = (ctypes.c_double*(2*n))()
+                pX = (t*(s*n))()
         else:
-            pX = (ctypes.c_double*2)()
+            pX = (t*s)()
     else:
         if (n > 1): 
-            pX = (ctypes.c_double*(2*n*nb))()
+            pX = (t*(s*n*nb))()
         else:
-            pX = (ctypes.c_double*(2*nb))()
+            pX = (t*(s*nb))()
     return pX
 
-def reshapetopointer(X, nb, n, m):
+def i_reshapefrompointer(pX, nb):
+    X = []
+    for k in range(nb):
+        X.append(pX[k])
+    return X
+
+def i_boolreshapefrompointer(pX, nb):
+    X = []
+    for k in range(nb):
+        X.append(bool(pX[k]))
+    return X
+
+def i_intervalreshapetopointer(X, nb, n, m):
     if (nb == 1):
         if (n > 1): 
             if (m > 1): 
@@ -28,8 +40,8 @@ def reshapetopointer(X, nb, n, m):
                 for i in range(n):
                     for j in range(m):
                         index = 2*(n*j+i)
-                        pX[index] = X[i][j][0]
-                        pX[index+1] = X[i][j][1]
+                        pX[index] = X[j][i][0]
+                        pX[index+1] = X[j][i][1]
             else:
                 pX = (ctypes.c_double*(2*n))()
                 for i in range(n):
@@ -46,8 +58,8 @@ def reshapetopointer(X, nb, n, m):
             for i in range(n):
                 for k in range(nb):
                     index = 2*(n*k+i)
-                    pX[index] = X[i][k][0]
-                    pX[index+1] = X[i][k][1]
+                    pX[index] = X[k][i][0]
+                    pX[index+1] = X[k][i][1]
         else:
             pX = (ctypes.c_double*(2*nb))()
             for k in range(nb):
@@ -56,7 +68,7 @@ def reshapetopointer(X, nb, n, m):
                 pX[index+1] = X[k][1]
     return pX
 
-def reshapefrompointer(pX, nb, n, m):
+def i_intervalreshapefrompointer(pX, nb, n, m):
     if (nb == 1):
         if (n > 1): 
             if (m > 1): 

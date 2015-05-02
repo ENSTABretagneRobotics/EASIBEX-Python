@@ -1,6 +1,6 @@
 from easibex_utils import *
 
-def i_defaultfn2arg(X_p, Y_p, function_p):
+def i_defaultintervalfn2arg(X_p, Y_p, function_p):
 
     # Put DLL in global and load elsewhere?
 
@@ -47,7 +47,7 @@ def i_defaultfn2arg(X_p, Y_p, function_p):
         i_error('Error : Unhandled argument type.')
     
     # Shape conversions suitable for the pointers to send to the library.
-    pZ = i_createpointer(nb, n, m, 2, ctypes.c_double)
+    pZ = i_createpointer(nb, 1, 1, 2, ctypes.c_double)
     pX_p = i_intervalreshapetopointer(X_p, nb, n, m)
     pY_p = i_intervalreshapetopointer(Y_p, nb, n, m)
 
@@ -58,6 +58,6 @@ def i_defaultfn2arg(X_p, Y_p, function_p):
     function_call(pZ, pX_p, pY_p, ctypes.c_uint(nb), ctypes.c_uint(n), ctypes.c_uint(m))
     
     # Conversions to human-readable format.
-    Z = i_intervalreshapefrompointer(pZ, nb, n, m)
+    Z = i_intervalreshapefrompointer(pZ, nb, 2, 1)
 
     return Z
