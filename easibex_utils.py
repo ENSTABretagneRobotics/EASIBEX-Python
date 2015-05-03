@@ -24,13 +24,13 @@ def i_reshapefrompointer(pX, nb):
     X = []
     for k in range(nb):
         X.append(pX[k])
-    return X
+    return tuple(X)
 
 def i_boolreshapefrompointer(pX, nb):
     X = []
     for k in range(nb):
         X.append(bool(pX[k]))
-    return X
+    return tuple(X)
 
 def i_intervalreshapetopointer(X, nb, n, m):
     if (nb == 1):
@@ -100,4 +100,5 @@ def i_intervalreshapefrompointer(pX, nb, n, m):
             for k in range(nb):
                 index = 2*k
                 X.append([pX[index],pX[index+1]])
+        X = tuple(X)
     return X
