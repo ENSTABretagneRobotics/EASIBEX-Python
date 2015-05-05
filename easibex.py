@@ -12,6 +12,7 @@ from i_defaultfn2arg import *
 from i_defaultibooleanfn2arg import *
 from i_defaultintervalfn2arg import *
 from i_defaultintfn1arg import *
+from i_Bisect import *
 
 
 # Should use NumPy arrays...?
@@ -51,8 +52,8 @@ from i_defaultintfn1arg import *
 # Y = ([[-4,1],[1,2],[-3,2]],[[-5,1],[-4,7],[-4,1]],[[-3,2],[2,2],[-1,0]],[[0,1],[-2,0],[-3,1]])
 # Z = i_Add(X,Y)
 
-# [Z, X, Y] = i_Cadd([-10,1], [0,2], [-1,2])
-# [Z, X, Y] = i_Cadd([[-10,10],[2,10],[10,11]], [[0,1],[0,10],[0,10]], [[-1,0],[2,5],[-1,0]])
+# Z, X, Y = i_Cadd([-10,1], [0,2], [-1,2])
+# Z, X, Y = i_Cadd([[-10,10],[2,10],[10,11]], [[0,1],[0,10],[0,10]], [[-1,0],[2,5],[-1,0]])
 
 NaN = float('NaN')
 Inf = float('Inf')
